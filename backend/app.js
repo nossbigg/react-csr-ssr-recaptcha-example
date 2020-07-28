@@ -1,9 +1,12 @@
 const express = require("express");
 const app = express();
+// cors to allow local setup
+const cors = require("cors");
+
 const BACKEND_PORT = 3005;
 
 const runApp = () => {
-  app.get("/unprotected", (req, res) => {
+  app.get("/unprotected", cors(), (req, res) => {
     const item = { item: { name: "Beyerdynamic DT 1350" } };
     res.status(200);
     res.json(item);
