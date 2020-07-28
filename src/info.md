@@ -1,0 +1,1 @@
+Directory used for Client-side Rendering (vanilla React)

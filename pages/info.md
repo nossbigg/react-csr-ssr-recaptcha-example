@@ -1,0 +1,1 @@
+Directory used for Server-side Rendering (Next.js)
