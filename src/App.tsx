@@ -4,12 +4,15 @@ import { RECAPTCHA_SITE_KEY } from "./common/recaptchaConstants";
 const App: React.FC = () => {
   const token = useRecaptchaHook();
   const unprotectedInfo = useGetUnprotectedInfoHook();
+  const protectedInfo = useGetProtectedInfoHook(token);
 
   return (
     <div>
       Hello World!
       <br />
       Unprotected Info: {JSON.stringify(unprotectedInfo)}
+      <br />
+      Protected Info: {JSON.stringify(protectedInfo)}
     </div>
   );
 };
@@ -51,6 +54,30 @@ const useGetUnprotectedInfoHook = () => {
       setInfo(respJson);
     });
   }, [info, setInfo]);
+
+  return info;
+};
+
+const useGetProtectedInfoHook = (recaptchaToken: string) => {
+  const [info, setInfo] = useState({});
+
+  useEffect(() => {
+    if (!recaptchaToken) {
+      return;
+    }
+
+    if (!isObjectEmpty(info)) {
+      return;
+    }
+
+    const requestHeaders = { recaptcha_token: recaptchaToken };
+    fetch("http://localhost:3005/protected", { headers: requestHeaders }).then(
+      async (resp) => {
+        const respJson = await resp.json();
+        setInfo(respJson);
+      }
+    );
+  }, [info, setInfo, recaptchaToken]);
 
   return info;
 };
