@@ -10,6 +10,7 @@
     "@types/node": "12.0.0",
     "@types/react": "16.9.0",
     "@types/react-dom": "16.9.0",
+    "express": "4.17.1",
     "next": "9.5.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -22,7 +23,8 @@
     "csr:build": "react-scripts build",
     "csr:test": "react-scripts test",
     "csr:eject": "react-scripts eject",
-    "start:ssr": "next"
+    "start:ssr": "next",
+    "start:backend": "node ./backend/index.js"
   },
   "eslintConfig": {
     "extends": "react-app"
