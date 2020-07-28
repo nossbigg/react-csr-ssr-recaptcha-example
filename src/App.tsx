@@ -1,20 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { RECAPTCHA_SITE_KEY } from "./common/recaptchaConstants";
 
 const App: React.FC = () => {
+  const token = useRecaptchaHook();
+
+  return <div>Hello World!</div>;
+};
+
+const useRecaptchaHook = () => {
+  const [recaptchaToken, setRecaptchaToken] = useState("");
+
   useEffect(() => {
+    if (recaptchaToken) {
+      return;
+    }
+
     const { grecaptcha } = window as any;
     grecaptcha.ready(async () => {
       const recaptchaAction = { action: "submit" };
-      const recaptchaToken = await grecaptcha.execute(
+      const token = await grecaptcha.execute(
         RECAPTCHA_SITE_KEY,
         recaptchaAction
       );
-      console.log(recaptchaToken);
+      setRecaptchaToken(token);
     });
-  }, []);
+  }, [recaptchaToken, setRecaptchaToken]);
 
-  return <div>Hello World!</div>;
+  return recaptchaToken;
 };
 
 export default App;
