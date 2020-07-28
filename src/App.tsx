@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { RECAPTCHA_SITE_KEY } from "./common/recaptchaConstants";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App: React.FC = () => {
+  useEffect(() => {
+    const { grecaptcha } = window as any;
+    grecaptcha.ready(async () => {
+      const recaptchaAction = { action: "submit" };
+      const recaptchaToken = await grecaptcha.execute(
+        RECAPTCHA_SITE_KEY,
+        recaptchaAction
+      );
+      console.log(recaptchaToken);
+    });
+  }, []);
+
+  return <div>Hello World!</div>;
+};
 
 export default App;
