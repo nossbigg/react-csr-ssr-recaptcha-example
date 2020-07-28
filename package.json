@@ -20,13 +20,13 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start:csr": "yarn csr:start",
+    "start:csr": "PORT=3001 yarn csr:start",
     "csr:start": "react-scripts start",
     "csr:build": "react-scripts build",
     "csr:test": "react-scripts test",
     "csr:eject": "react-scripts eject",
-    "start:ssr": "next",
-    "start:backend": "node ./backend/index.js"
+    "start:ssr": "next -p 3002",
+    "start:backend": "BACKEND_PORT=3005 node ./backend/index.js"
   },
   "eslintConfig": {
     "extends": "react-app"

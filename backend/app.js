@@ -5,7 +5,7 @@ const app = express();
 const cors = require("cors");
 
 const corsMiddleware = cors();
-const BACKEND_PORT = 3005;
+const BACKEND_PORT = process.env.BACKEND_PORT;
 const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
 
 const runApp = () => {
