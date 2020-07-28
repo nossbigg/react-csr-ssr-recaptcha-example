@@ -16,10 +16,11 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start:csr": "yarn csr:start",
+    "csr:start": "react-scripts start",
+    "csr:build": "react-scripts build",
+    "csr:test": "react-scripts test",
+    "csr:eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
