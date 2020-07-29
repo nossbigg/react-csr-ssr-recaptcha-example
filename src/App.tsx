@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { RECAPTCHA_SITE_KEY } from "./common/recaptchaConstants";
 import { useRecaptchaHook } from "./common/useRecaptchaHook";
+import { useGetProtectedInfoHook } from "./common/useGetProtectedInfoHook";
+import { isObjectEmpty } from "./common/utils";
 
 const App: React.FC = () => {
   const token = useRecaptchaHook(RECAPTCHA_SITE_KEY);
@@ -18,8 +20,6 @@ const App: React.FC = () => {
   );
 };
 
-const isObjectEmpty = (obj: Object) => Object.keys(obj).length === 0;
-
 const useGetUnprotectedInfoHook = () => {
   const [info, setInfo] = useState({});
 
@@ -33,30 +33,6 @@ const useGetUnprotectedInfoHook = () => {
       setInfo(respJson);
     });
   }, [info, setInfo]);
-
-  return info;
-};
-
-const useGetProtectedInfoHook = (recaptchaToken: string) => {
-  const [info, setInfo] = useState({});
-
-  useEffect(() => {
-    if (!recaptchaToken) {
-      return;
-    }
-
-    if (!isObjectEmpty(info)) {
-      return;
-    }
-
-    const requestHeaders = { recaptcha_token: recaptchaToken };
-    fetch("http://localhost:3005/protected", { headers: requestHeaders }).then(
-      async (resp) => {
-        const respJson = await resp.json();
-        setInfo(respJson);
-      }
-    );
-  }, [info, setInfo, recaptchaToken]);
 
   return info;
 };
