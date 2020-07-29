@@ -20,7 +20,7 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start:csr": "PORT=3001 yarn csr:start",
+    "start:csr": "PORT=3001 REACT_APP_RECAPTCHA_SITE_KEY=$RECAPTCHA_SITE_KEY yarn csr:start",
     "csr:start": "react-scripts start",
     "csr:build": "react-scripts build",
     "csr:test": "react-scripts test",

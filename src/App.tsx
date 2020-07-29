@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { RECAPTCHA_SITE_KEY } from "./common/recaptchaConstants";
+import { RECAPTCHA_SITE_KEY } from "./common/recaptchaEnvVars";
 import { useRecaptchaHook } from "./common/useRecaptchaHook";
 import { useGetProtectedInfoHook } from "./common/useGetProtectedInfoHook";
 import { isObjectEmpty } from "./common/utils";
