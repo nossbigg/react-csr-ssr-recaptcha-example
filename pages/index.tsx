@@ -1,8 +1,8 @@
 import React from "react";
 import { GetServerSideProps } from "next";
-import { RECAPTCHA_SITE_KEY } from "../src/common/recaptchaConstants";
 import { useRecaptchaHook } from "../src/common/useRecaptchaHook";
 import { useGetProtectedInfoHook } from "../src/common/useGetProtectedInfoHook";
+import { RECAPTCHA_SITE_KEY } from "./recaptchaEnvVars";
 
 type IndexPageType = IndexPageServerSideProps;
 type IndexPageServerSideProps = { unprotectedInfo: Object };

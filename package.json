@@ -25,7 +25,7 @@
     "csr:build": "react-scripts build",
     "csr:test": "react-scripts test",
     "csr:eject": "react-scripts eject",
-    "start:ssr": "next -p 3002",
+    "start:ssr": "NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$RECAPTCHA_SITE_KEY next -p 3002",
     "start:backend": "BACKEND_PORT=3005 node ./backend/index.js"
   },
   "eslintConfig": {
