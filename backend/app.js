@@ -3,10 +3,10 @@ const express = require("express");
 const app = express();
 // cors to allow local setup
 const cors = require("cors");
+const { RECAPTCHA_SECRET_KEY } = require("./recaptchaEnvVars");
 
 const corsMiddleware = cors();
 const BACKEND_PORT = process.env.BACKEND_PORT;
-const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
 
 const runApp = () => {
   app.get("/unprotected", corsMiddleware, (req, res) => {
