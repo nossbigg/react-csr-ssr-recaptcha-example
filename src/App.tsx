@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { RECAPTCHA_SITE_KEY } from "./common/recaptchaConstants";
+import { useRecaptchaHook } from "./common/useRecaptchaHook";
 
 const App: React.FC = () => {
-  const token = useRecaptchaHook();
+  const token = useRecaptchaHook(RECAPTCHA_SITE_KEY);
   const unprotectedInfo = useGetUnprotectedInfoHook();
   const protectedInfo = useGetProtectedInfoHook(token);
 
@@ -15,28 +16,6 @@ const App: React.FC = () => {
       Protected Info: {JSON.stringify(protectedInfo)}
     </div>
   );
-};
-
-const useRecaptchaHook = () => {
-  const [recaptchaToken, setRecaptchaToken] = useState("");
-
-  useEffect(() => {
-    if (recaptchaToken) {
-      return;
-    }
-
-    const { grecaptcha } = window as any;
-    grecaptcha.ready(async () => {
-      const recaptchaAction = { action: "submit" };
-      const token = await grecaptcha.execute(
-        RECAPTCHA_SITE_KEY,
-        recaptchaAction
-      );
-      setRecaptchaToken(token);
-    });
-  }, [recaptchaToken, setRecaptchaToken]);
-
-  return recaptchaToken;
 };
 
 const isObjectEmpty = (obj: Object) => Object.keys(obj).length === 0;
