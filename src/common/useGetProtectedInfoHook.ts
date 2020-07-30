@@ -14,12 +14,12 @@ export const useGetProtectedInfoHook = (recaptchaToken: string) => {
     }
 
     const requestHeaders = { recaptcha_token: recaptchaToken };
-    fetch("http://localhost:3005/protected", { headers: requestHeaders }).then(
-      async (resp) => {
+    fetch("http://localhost:3005/protected", { headers: requestHeaders })
+      .then(async (resp) => {
         const respJson = await resp.json();
         setInfo(respJson);
-      }
-    );
+      })
+      .catch(() => {});
   }, [info, setInfo, recaptchaToken]);
 
   return info;

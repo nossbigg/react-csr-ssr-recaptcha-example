@@ -53,14 +53,20 @@ const validateRecaptchaToken = async (token) => {
     body: `secret=${recaptchaOptions.secret}&response=${recaptchaOptions.response}`,
     headers: { "Content-type": "application/x-www-form-urlencoded" },
   };
-  const resp = await fetch(
-    "https://www.google.com/recaptcha/api/siteverify",
-    fetchOptions
-  );
-  const respJson = await resp.json();
-  const { success } = respJson;
 
-  return success;
+  try {
+    const resp = await fetch(
+      "https://www.google.com/recaptcha/api/siteverify",
+      fetchOptions
+    );
+    const respJson = await resp.json();
+    const { success, score } = respJson;
+
+    const isValidRecaptchaAttempt = success && score > 0.5;
+    return isValidRecaptchaAttempt;
+  } catch (e) {
+    return false;
+  }
 };
 
 module.exports = runApp;

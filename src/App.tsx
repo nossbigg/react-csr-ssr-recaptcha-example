@@ -28,10 +28,12 @@ const useGetUnprotectedInfoHook = () => {
       return;
     }
 
-    fetch("http://localhost:3005/unprotected").then(async (resp) => {
-      const respJson = await resp.json();
-      setInfo(respJson);
-    });
+    fetch("http://localhost:3005/unprotected")
+      .then(async (resp) => {
+        const respJson = await resp.json();
+        setInfo(respJson);
+      })
+      .catch(() => {});
   }, [info, setInfo]);
 
   return info;
