@@ -1,22 +1,24 @@
 const fetch = require("node-fetch");
 const express = require("express");
-const app = express();
-// cors to allow local setup
 const cors = require("cors");
 const { RECAPTCHA_SECRET_KEY } = require("./recaptchaEnvVars");
 
-const corsMiddleware = cors();
 const BACKEND_PORT = process.env.BACKEND_PORT;
 
 const runApp = () => {
+  const app = express();
+  // cors to allow local setup
+  const corsMiddleware = cors();
+
   app.get("/unprotected", corsMiddleware, (req, res) => {
     const item = { item: { name: "Beyerdynamic DT 1350" } };
     res.status(200);
     res.json(item);
   });
 
+  // for preflight CORS request
   app.options("/protected", corsMiddleware, (req, res) => {
-    res.status(200);
+    res.status(204);
     res.end();
   });
 
@@ -37,6 +39,8 @@ const runApp = () => {
   app.listen(BACKEND_PORT, () =>
     console.log(`Example app listening at http://localhost:${BACKEND_PORT}`)
   );
+
+  return app;
 };
 
 const validateRecaptchaToken = async (token) => {
