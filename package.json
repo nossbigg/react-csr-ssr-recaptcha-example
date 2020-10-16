@@ -26,7 +26,8 @@
     "csr:test": "react-scripts test",
     "csr:eject": "react-scripts eject",
     "start:ssr": "NEXT_PUBLIC_RECAPTCHA_SITE_KEY=$RECAPTCHA_SITE_KEY next -p 3002",
-    "start:backend": "BACKEND_PORT=3005 node ./backend/index.js"
+    "start:backend": "BACKEND_PORT=3005 node ./backend/index.js",
+    "test": "jest --watch"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -42,5 +43,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/supertest": "2.0.10",
+    "nock": "^13.0.4",
+    "supertest": "5.0.0"
   }
 }
