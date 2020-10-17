@@ -28,7 +28,7 @@ const useGetUnprotectedInfoHook = () => {
       return;
     }
 
-    fetch("http://localhost:3005/unprotected")
+    fetch("http://localhost:3005/getItem")
       .then(async (resp) => {
         const respJson = await resp.json();
         setInfo(respJson);

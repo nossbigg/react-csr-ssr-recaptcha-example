@@ -14,7 +14,7 @@ export const useGetProtectedInfoHook = (recaptchaToken: string) => {
     }
 
     const requestHeaders = { recaptcha_token: recaptchaToken };
-    fetch("http://localhost:3005/protected", { headers: requestHeaders })
+    fetch("http://localhost:3005/getItem", { headers: requestHeaders })
       .then(async (resp) => {
         const respJson = await resp.json();
         setInfo(respJson);

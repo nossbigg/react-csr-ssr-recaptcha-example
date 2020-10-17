@@ -27,7 +27,7 @@ const IndexPage: React.FC<IndexPageType> = (props) => {
 export const getServerSideProps: GetServerSideProps<IndexPageServerSideProps> = async () => {
   let respJson: Object = {};
   try {
-    const resp = await fetch("http://localhost:3005/unprotected");
+    const resp = await fetch("http://localhost:3005/getItem");
     respJson = await resp.json();
   } catch (e) {}
 

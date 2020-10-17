@@ -13,9 +13,9 @@ describe("app", () => {
     nock.cleanAll();
   });
 
-  it("supports GET /unprotected", () => {
+  it("supports GET /getItem", () => {
     return request(app)
-      .get("/unprotected")
+      .get("/getItem")
       .expect(200)
       .then((response) => {
         const expectedResponse = { item: { name: "Beyerdynamic DT 1350" } };
@@ -23,16 +23,16 @@ describe("app", () => {
       });
   });
 
-  describe("/protected", () => {
-    it("supports OPTIONS /protected", () => {
-      return request(app).options("/protected").expect(204);
-    });
+  it("supports OPTIONS /getItem", () => {
+    return request(app).options("/getItem").expect(204);
+  });
 
-    it("supports GET /protected", async () => {
+  describe("protected data", () => {
+    it("supports GET /getItem", async () => {
       applyGoogleRecaptchaMock(0.9);
 
       return request(app)
-        .get("/protected")
+        .get("/getItem")
         .set("recaptcha_token", "some-recaptcha-token")
         .expect(200)
         .then((response) => {
@@ -47,7 +47,7 @@ describe("app", () => {
       applyGoogleRecaptchaMock(0.4);
 
       return request(app)
-        .get("/protected")
+        .get("/getItem")
         .set("recaptcha_token", "some-recaptcha-token")
         .expect(403);
     });
